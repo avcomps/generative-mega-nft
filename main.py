@@ -19,5 +19,7 @@ def main() :
 if __name__ == "__main__" : 
     try : 
         main()
-    except(KeyboardInterrupt) : 
-        print("\nERROR: Script finished by keyboard interrupt")
+    except(KeyboardInterrupt) :
+        print("\n") 
+        logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+        logging.error("Script finished by keyboard interrupt")
