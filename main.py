@@ -5,7 +5,7 @@ import requests as rq
 from PIL import Image, ImageDraw
 # from icrawler.examples import GoogleImageCrawler
 
-image_final_NFT = Image.new("RGB", (0, 0))
+image_final_NFT = Image.new("RGB", (160, 160))
 
 def main() : 
     crawlImages()
@@ -19,16 +19,23 @@ def crawlImages() :
     pass
 
 def createNFT() : 
+    image_segment_h : Image
+    global image_final_NFT
     drawGoalImage()
-    for i in range(803) : 
-        if i == 0 : 
-            get_concat_h(image_final_NFT, drawWhiteSquare())
-        else : 
-            # if not first draw, concat new goal image or white-empty square
-            pass
+    for i in range(28) : 
+        for j in range(28) : 
+            if i == 0 : 
+                # if is first draw, append just one initial white square to newly created horizontal segment
+                image_segment_h = drawWhiteSquare()
+            else : 
+                # if isn't first draw, concat new goal-image or white-empty square to previous segment, until arrives 28 shapes (28 * 160 = 4480px.)
+                pass
+        # append new full-completed horizontal segment to final NFT image
+        image_final_NFT = get_concat_v(image_final_NFT, image_segment_h)
 
+    image_final_NFT.save("./final_NFT.jpg")
+    print("finished!")
 
-# ------------------------------------------------------
 
 def drawGoalImage() : 
     pass
@@ -39,8 +46,7 @@ def drawWhiteSquare() :
     img = Image.new("RGB", (w, h))
     img1 = ImageDraw.Draw(img)
     img1.rectangle(shape, fill ="white")
-    # img.save("./example.jpg")
-    return img1
+    return img
 
 def get_concat_h(im1, im2):
     dst = Image.new('RGB', (im1.width + im2.width, im1.height))
