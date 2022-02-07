@@ -3,9 +3,7 @@
 # Modules & libraries.
 import requests as rq
 import logging
-from icrawler.examples import GoogleImageCrawler
-
-
+from icrawler import GoogleImageCrawler
 
 def main() : 
     # goal example : ronaldo goal vs moreirense 2:0 solo run 2002/03
