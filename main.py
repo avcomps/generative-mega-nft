@@ -24,7 +24,7 @@ def createNFT() :
     drawGoalImage()
     for i in range(28) : 
         for j in range(28) : 
-            if i == 0 : 
+            if j == 0 : 
                 # if is first draw, append just one initial white square to newly created horizontal segment
                 image_segment_h = drawWhiteSquare()
             else : 
