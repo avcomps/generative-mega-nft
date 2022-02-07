@@ -5,9 +5,10 @@ import requests as rq
 from PIL import Image, ImageDraw
 # from icrawler.examples import GoogleImageCrawler
 
+image_final_NFT = Image.new("RGB", (0, 0))
 
 def main() : 
-    # crawlImages()
+    crawlImages()
     createNFT()
 
 def crawlImages() : 
@@ -19,24 +20,27 @@ def crawlImages() :
 
 def createNFT() : 
     drawGoalImage()
-    drawEmptyRectangle()
+    for i in range(803) : 
+        if i == 0 : 
+            get_concat_h(image_final_NFT, drawWhiteSquare())
+        else : 
+            # if not first draw, concat new goal image or white-empty square
+            pass
 
 
-# ------------------------------------------------------
-# ------------------------------------------------------
 # ------------------------------------------------------
 
 def drawGoalImage() : 
     pass
 
-def drawEmptyRectangle() : 
+def drawWhiteSquare() : 
     w, h = 160, 160
     shape = [(0, 0), (w, h)]
     img = Image.new("RGB", (w, h))
     img1 = ImageDraw.Draw(img)
     img1.rectangle(shape, fill ="white")
-    img.save("./example.jpg")
-    print("finished!")
+    # img.save("./example.jpg")
+    return img1
 
 def get_concat_h(im1, im2):
     dst = Image.new('RGB', (im1.width + im2.width, im1.height))
