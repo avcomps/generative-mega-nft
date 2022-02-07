@@ -16,14 +16,14 @@ def draw_white_square() :
 def draw_goal_image() : 
     pass
 
-def get_concat_h(im1, im2) :
+def concatenate_h(im1, im2) :
     dst = Image.new('RGB', (im1.width + im2.width, im1.height))
     dst.paste(im1, (0, 0))
     dst.paste(im2, (im1.width, 0))
 
     return dst
 
-def get_concat_v(im1, im2) :
+def concatenate_v(im1, im2) :
     dst = Image.new('RGB', (im1.width, im1.height + im2.height))
     dst.paste(im1, (0, 0))
     dst.paste(im2, (0, im1.height))
@@ -41,12 +41,12 @@ def create_NFT() :
         for j in range(28) :
             if (j == 0) :
                 image_segment_h = draw_white_square()
-                
+
             else:
-                image_segment_h = get_concat_h(draw_white_square(), image_segment_h)
+                image_segment_h = concatenate_h(draw_white_square(), image_segment_h)
 
         if (j != 28) :
-            image_final_NFT = get_concat_v(image_segment_h, image_final_NFT)
+            image_final_NFT = concatenate_v(image_segment_h, image_final_NFT)
 
     image_final_NFT.save("./example.jpg")
     print("------------------- Finished !!! --------------------------")
@@ -55,7 +55,6 @@ def create_NFT() :
 def main():
     crawl_images()
     create_NFT()
-
 
 if __name__ == "__main__":
     try:
