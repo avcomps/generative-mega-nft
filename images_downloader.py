@@ -1,6 +1,5 @@
 # Copyright @ Ali Vorobiev (https://github.com/avcomps).
 
-from ctypes.wintypes import PLARGE_INTEGER
 import requests as rq
 from bs4 import BeautifulSoup
 
