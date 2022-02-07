@@ -40,11 +40,12 @@ def create_NFT():
         for j in range(28):
             if j == 0:
                 image_segment_h = draw_white_square()
+                pass
             else:
                 image_segment_h = get_concat_h(
-                    image_segment_h, draw_white_square())
+                    draw_white_square(), image_segment_h)
 
-        image_final_NFT = get_concat_v(image_final_NFT, image_segment_h)
+        image_final_NFT = get_concat_v(image_segment_h, image_final_NFT)
 
     image_final_NFT.save("./final_NFT.jpg")
     print("finished!")
