@@ -6,6 +6,10 @@ from PIL import Image, ImageDraw
 # from icrawler.examples import GoogleImageCrawler
 
 image_final_NFT = Image.new("RGB", (160, 160))
+    shape = [(0, 0), (w, h)]
+    img = Image.new("RGB", (w, h))
+    img1 = ImageDraw.Draw(img)
+    img1.rectangle(shape, fill ="white")
 
 def main() : 
     crawlImages()
