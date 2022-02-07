@@ -29,7 +29,8 @@ def createNFT() :
                 image_segment_h = drawWhiteSquare()
             else : 
                 # if isn't first draw, concat new goal-image or white-empty square to previous segment, until arrives 28 shapes (28 * 160 = 4480px.)
-                pass
+                image_segment_h = get_concat_h(image_segment_h, drawWhiteSquare())
+                
         # append new full-completed horizontal segment to final NFT image
         image_final_NFT = get_concat_v(image_final_NFT, image_segment_h)
 
