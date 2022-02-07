@@ -9,8 +9,8 @@ def draw_white_square():
     w, h = 160, 160
     shape = [(0, 0), (w, h)]
     img = Image.new("RGB", (w, h))
-    img1 = ImageDraw.Draw(img)
-    img1.rectangle(shape, fill="white")
+    ImageDraw.Draw(img).rectangle(shape, fill="white")
+
     return img
 
 def get_concat_h(im1, im2):
@@ -35,8 +35,8 @@ def create_NFT():
     global image_final_NFT
     image_segment_h = Image.new("RGB", (160, 160))
 
-    for i in range(27):
-        for j in range(27):
+    for i in range(28):
+        for j in range(28):
             if j == 0:
                 image_segment_h = draw_white_square()
             else:
