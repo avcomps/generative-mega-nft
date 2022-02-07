@@ -5,7 +5,7 @@ from PIL import Image, ImageDraw
 
 image_final_NFT = Image.new("RGB", (160, 160))
 
-def draw_white_square():
+def draw_white_square() :
     w, h = 160, 160
     shape = [(0, 0), (w, h)]
     img = Image.new("RGB", (w, h))
@@ -13,42 +13,48 @@ def draw_white_square():
 
     return img
 
-def get_concat_h(im1, im2):
+def draw_goal_image() : 
+    pass
+
+def get_concat_h(im1, im2) :
     dst = Image.new('RGB', (im1.width + im2.width, im1.height))
     dst.paste(im1, (0, 0))
     dst.paste(im2, (im1.width, 0))
 
     return dst
 
-def get_concat_v(im1, im2):
+def get_concat_v(im1, im2) :
     dst = Image.new('RGB', (im1.width, im1.height + im2.height))
     dst.paste(im1, (0, 0))
     dst.paste(im2, (0, im1.height))
-    
+
     return dst
 
-def crawl_images():
-    print
+def crawl_images() :
+    pass
 
-
-def create_NFT():
+def create_NFT() :
     global image_final_NFT
     image_segment_h = Image.new("RGB", (160, 160))
 
-    for i in range(28):
-        for j in range(28):
-            if j == 0:
+    for i in range(28) :
+        for j in range(28) :
+            if (j == 0) :
                 image_segment_h = draw_white_square()
+                
             else:
                 image_segment_h = get_concat_h(draw_white_square(), image_segment_h)
 
-        image_final_NFT = get_concat_v(image_segment_h, image_final_NFT)
+        if (j != 28) :
+            image_final_NFT = get_concat_v(image_segment_h, image_final_NFT)
 
     image_final_NFT.save("./example.jpg")
     print("------------------- Finished !!! --------------------------")
 
+
 def main():
-    crawl_images(); create_NFT()
+    crawl_images()
+    create_NFT()
 
 
 if __name__ == "__main__":
