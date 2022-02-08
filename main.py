@@ -41,10 +41,8 @@ def create_NFT() :
         for j in range(28) :
             if (j == 0) :
                 image_segment_h = draw_white_square()
-
             else:
                 image_segment_h = concatenate_h(draw_white_square(), image_segment_h)
-
         if (j != 28) :
             image_final_NFT = concatenate_v(image_segment_h, image_final_NFT)
 
