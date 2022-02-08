@@ -34,7 +34,7 @@ def crawl_images() :
     pass
 
 def create_NFT() :
-    # Firstly, create horizontal segment by repeating white-squares 28 times
+    # First, create horizontal segment by repeating white-squares 28 times
     image_segment_h = draw_white_square()
     for x in range(27) : 
         image_segment_h = concatenate_h(draw_white_square(), image_segment_h)
