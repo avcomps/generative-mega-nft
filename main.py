@@ -2,12 +2,14 @@
 
 import requests as rq
 from PIL import Image, ImageDraw
+import random
 
 def draw_white_square() :
     w, h = 160, 160
     shape = [(0, 0), (w, h)]
     img = Image.new("RGB", (w, h))
-    ImageDraw.Draw(img).rectangle(shape, fill="white")
+    color = "#%06x" % random.randint(0, 0xFFFFFF)
+    ImageDraw.Draw(img).rectangle(shape, fill=color)
 
     return img
 
@@ -32,12 +34,13 @@ def crawl_images() :
     pass
 
 def create_NFT() :
+    # Firstly, create horizontal segment by repeating white-squares 28 times
     image_segment_h = draw_white_square()
     for x in range(27) : 
         image_segment_h = concatenate_h(draw_white_square(), image_segment_h)
 
-    image_final_NFT = image_segment_h
-    
+    # Secondly, repeat horizontal segment vertically another 28 times
+    image_final_NFT = image_segment_h    
     for y in range(27) : 
         image_final_NFT = concatenate_v(image_segment_h, image_final_NFT)   
 
