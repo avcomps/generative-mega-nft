@@ -3,8 +3,6 @@
 import requests as rq
 from PIL import Image, ImageDraw
 
-image_final_NFT = Image.new("RGB", (160, 160))
-
 def draw_white_square() :
     w, h = 160, 160
     shape = [(0, 0), (w, h)]
@@ -34,17 +32,14 @@ def crawl_images() :
     pass
 
 def create_NFT() :
-    global image_final_NFT
-    image_segment_h = Image.new("RGB", (160, 160))
+    image_segment_h = draw_white_square()
+    for x in range(27) : 
+        image_segment_h = concatenate_h(draw_white_square(), image_segment_h)
 
-    for i in range(28) :
-        for j in range(28) :
-            if (j == 0) :
-                image_segment_h = draw_white_square()
-            else:
-                image_segment_h = concatenate_h(draw_white_square(), image_segment_h)
-        if (j != 28) :
-            image_final_NFT = concatenate_v(image_segment_h, image_final_NFT)
+    image_final_NFT = image_segment_h
+    
+    for y in range(27) : 
+        image_final_NFT = concatenate_v(image_segment_h, image_final_NFT)   
 
     image_final_NFT.save("./example.jpg")
     print("------------------- Finished !!! --------------------------")
