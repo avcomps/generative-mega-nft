@@ -8,8 +8,7 @@ def draw_white_square() :
     w, h = 160, 160
     shape = [(0, 0), (w, h)]
     img = Image.new("RGB", (w, h))
-    color = "#%06x" % random.randint(0, 0xFFFFFF)
-    ImageDraw.Draw(img).rectangle(shape, fill=color)
+    ImageDraw.Draw(img).rectangle(shape, fill=("#%06x" % random.randint(0, 0xFFFFFF)))
 
     return img
 
