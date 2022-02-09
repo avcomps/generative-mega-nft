@@ -25,7 +25,7 @@ def draw_white_square() :
 
 def draw_goal_image() : 
     img_goal = Image.open("./goals/example_goal.jpg")
-    img_goal.thumbnail((300, 300))
+    img_goal.thumbnail((400, 400))
     return img_goal.crop(((img_goal.width - 160) // 2, (img_goal.height - 160) // 2, 
                                 (img_goal.width + 160) // 2, (img_goal.height + 160) // 2))
 
@@ -48,7 +48,7 @@ def draw_nft() :
                     first_square = draw_white_square()
                 first_square = concatenate_h(first_square, draw_white_square())
             first_segment = concatenate_v(first_segment, first_square)
-    
+
     first_segment.save("./example.jpg", "JPEG")
 
 
