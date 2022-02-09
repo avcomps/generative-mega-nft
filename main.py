@@ -4,16 +4,6 @@ import requests as rq
 from PIL import Image, ImageDraw
 import random
 
-def draw_white_square() :
-    w, h = 160, 160; shape = [(0, 0), (w, h)]
-    img = Image.new("RGB", (w, h))
-    ImageDraw.Draw(img).rectangle(shape, fill=("#%06x" % random.randint(0, 0xFFFFFF)))
-
-    return img
-
-def draw_goal_image() : 
-    pass
-
 def concatenate_h(img_left, img_right) :
     img_new = Image.new('RGB', (img_left.width + img_right.width, img_left.height))
     img_new.paste(img_left, (0, 0))
@@ -26,17 +16,29 @@ def concatenate_v(img_left, img_right) :
     img_new.paste(img_right, (0, img_left.height))
     return img_new
 
-def crawl_images() :
+def draw_white_square() :
+    w, h = 160, 160; shape = [(0, 0), (w, h)]
+    img = Image.new('RGB', (w, h))
+    ImageDraw.Draw(img).rectangle(shape, fill=("#%06x" % random.randint(0, 0xFFFFFF)))
+
+    return img
+
+def draw_goal_image() : 
+    img_goal = Image.open("./goals/example_goal.jpg")
+    img_goal.thumbnail((160, 160))
+    return img_goal
+
+def crawl_goal_images() :
     pass
 
 def draw_nft() :
-    first_segment = draw_white_square()
+    first_segment : Image
     for y in range(30) :
         if (y == 0) :
             for x in range(27) :
                 if (x == 0) :
-                    first_square = draw_white_square()
-                first_square = concatenate_h(first_square, draw_white_square())
+                    first_square = draw_goal_image()
+                first_square = concatenate_h(first_square, draw_goal_image())
             first_segment = first_square
         else :
             for x in range(27) :
@@ -45,10 +47,11 @@ def draw_nft() :
                 first_square = concatenate_h(first_square, draw_white_square())
             first_segment = concatenate_v(first_segment, first_square)
     
-    first_segment.save("./example.jpg")
+    first_segment.save("./example.jpg", "JPEG")
 
 
 def main():
+    crawl_goal_images()
     draw_nft()
 
 if __name__ == "__main__":
