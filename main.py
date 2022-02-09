@@ -55,14 +55,14 @@ def main():
                 if (x == 0) :
                     first_square = draw_white_square()
                 first_square = concatenate_h(first_square, draw_white_square())
+            first_segment = first_square
         else :
             for x in range(27) :
                 if (x == 0) :
                     first_square = draw_white_square()
                 first_square = concatenate_h(first_square, draw_white_square())
+            first_segment = concatenate_v(first_segment, first_square)
     
-    first_segment = first_square
-
     first_segment.save("./example.jpg")
 
 if __name__ == "__main__":
