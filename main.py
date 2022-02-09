@@ -48,8 +48,22 @@ def create_NFT() :
 
 
 def main():
-    crawl_images()
-    create_NFT()
+    first_segment = draw_white_square()
+    for y in range(27) :
+        if (y == 0) :
+            for x in range(27) :
+                if (x == 0) :
+                    first_square = draw_white_square()
+                first_square = concatenate_h(first_square, draw_white_square())
+        else :
+            for x in range(27) :
+                if (x == 0) :
+                    first_square = draw_white_square()
+                first_square = concatenate_h(first_square, draw_white_square())
+    
+    first_segment = first_square
+
+    first_segment.save("./example.jpg")
 
 if __name__ == "__main__":
     try:
