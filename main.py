@@ -17,22 +17,24 @@ def concatenate_v(img_left, img_right) :
     return img_new
 
 def draw_white_square() :
-    w, h = 160, 160; shape = [(0, 0), (w, h)]
-    img = Image.new('RGB', (w, h))
-    ImageDraw.Draw(img).rectangle(shape, fill=("#%06x" % random.randint(0, 0xFFFFFF)))
+    img_weigth, img_height = 160, 160; shape = [(0, 0), (img_weigth, img_height)]
+    img_res = Image.new('RGB', (img_weigth, img_height))
+    ImageDraw.Draw(img_res).rectangle(shape, fill=("#%06x" % random.randint(0, 0xFFFFFF)))
 
-    return img
+    return img_res
 
 def draw_goal_image() : 
     img_goal = Image.open("./goals/example_goal.jpg")
-    img_goal.thumbnail((160, 160))
-    return img_goal
+    img_goal.thumbnail((300, 300))
+    return img_goal.crop(((img_goal.width - 160) // 2, (img_goal.height - 160) // 2, 
+                                (img_goal.width + 160) // 2, (img_goal.height + 160) // 2))
 
 def crawl_goal_images() :
     pass
 
 def draw_nft() :
     first_segment : Image
+    current_pos = 0
     for y in range(30) :
         if (y == 0) :
             for x in range(27) :
