@@ -15,19 +15,17 @@ def draw_white_square() :
 def draw_goal_image() : 
     pass
 
-def concatenate_h(im1, im2) :
-    dst = Image.new('RGB', (im1.width + im2.width, im1.height))
-    dst.paste(im1, (0, 0))
-    dst.paste(im2, (im1.width, 0))
+def concatenate_h(img_left, img_right) :
+    img_new = Image.new('RGB', (img_left.width + img_right.width, img_left.height))
+    img_new.paste(img_left, (0, 0))
+    img_new.paste(img_right, (img_left.width, 0))
+    return img_new
 
-    return dst
-
-def concatenate_v(im1, im2) :
-    dst = Image.new('RGB', (im1.width, im1.height + im2.height))
-    dst.paste(im1, (0, 0))
-    dst.paste(im2, (0, im1.height))
-
-    return dst
+def concatenate_v(img_left, img_right) :
+    img_new = Image.new('RGB', (img_left.width, img_left.height + img_right.height))
+    img_new.paste(img_left, (0, 0))
+    img_new.paste(img_right, (0, img_left.height))
+    return img_new
 
 def crawl_images() :
     pass
