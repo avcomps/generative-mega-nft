@@ -38,18 +38,21 @@ def draw_nft() :
     for y in range(30) :
         if (y == 0) :
             for x in range(27) :
+                current_pos += 1
                 if (x == 0) :
                     first_square = draw_goal_image()
                 first_square = concatenate_h(first_square, draw_goal_image())
             first_segment = first_square
         else :
             for x in range(27) :
+                current_pos += 1
                 if (x == 0) :
                     first_square = draw_white_square()
                 first_square = concatenate_h(first_square, draw_white_square())
             first_segment = concatenate_v(first_segment, first_square)
-
+    
     first_segment.save("./example.jpg", "JPEG")
+    print(current_pos)
 
 
 def main():
