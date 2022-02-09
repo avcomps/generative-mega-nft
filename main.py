@@ -32,42 +32,27 @@ def concatenate_v(im1, im2) :
 def crawl_images() :
     pass
 
-def create_NFT() :
-    # First, create horizontal segment by repeating white-squares 28 times
-    image_segment_h = draw_white_square()
-    for x in range(27) : 
-        image_segment_h = concatenate_h(draw_white_square(), image_segment_h)
-
-    # Secondly, repeat horizontal segment vertically another 28 times
-    image_final_NFT = image_segment_h    
-    for y in range(27) : 
-        image_final_NFT = concatenate_v(image_segment_h, image_final_NFT)   
-
-    image_final_NFT.save("./example.jpg")
-    print("------------------- Finished !!! --------------------------")
-
-
-def main():
-    num_squares = 0
+def draw_nft() :
     first_segment = draw_white_square()
     for y in range(30) :
         if (y == 0) :
             for x in range(27) :
-                num_squares += 1
                 if (x == 0) :
                     first_square = draw_white_square()
                 first_square = concatenate_h(first_square, draw_white_square())
             first_segment = first_square
         else :
             for x in range(27) :
-                num_squares += 1
                 if (x == 0) :
                     first_square = draw_white_square()
                 first_square = concatenate_h(first_square, draw_white_square())
             first_segment = concatenate_v(first_segment, first_square)
     
-    print(num_squares)
     first_segment.save("./example.jpg")
+
+
+def main():
+    draw_nft()
 
 if __name__ == "__main__":
     try:
