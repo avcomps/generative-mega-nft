@@ -23,7 +23,7 @@ def draw_white_square() :
 
     return img_res
 
-def draw_goal_image() : 
+def draw_goal_image(index) : 
     img_goal = Image.open("./goals/example_goal.jpg")
     img_goal.thumbnail((400, 400))
     return img_goal.crop(((img_goal.width - 160) // 2, (img_goal.height - 160) // 2, 
