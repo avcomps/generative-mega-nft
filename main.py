@@ -5,8 +5,7 @@ from PIL import Image, ImageDraw
 import random
 
 def draw_white_square() :
-    w, h = 160, 160
-    shape = [(0, 0), (w, h)]
+    w, h = 160, 160; shape = [(0, 0), (w, h)]
     img = Image.new("RGB", (w, h))
     ImageDraw.Draw(img).rectangle(shape, fill=("#%06x" % random.randint(0, 0xFFFFFF)))
 
