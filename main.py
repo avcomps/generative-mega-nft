@@ -35,7 +35,7 @@ def draw_goal_image() :
     return img_goal
 
 def crawl_goal_images() :
-    return 
+    return
     with open('./goals.json', 'r') as file_goals :
         goals = json.load(file_goals); i = 0
 
@@ -46,7 +46,7 @@ def crawl_goal_images() :
     for goal in goals :
         url = "https://www.google.com/search?q=" + "ronaldo" + "&rlz=1C1ONGR_esES976ES976&source=lnms&tbm=isch&sa=X&ved=2ahUKEwi6zq2ThfT1AhUQtaQKHSMEAwMQ_AUoAXoECAIQAw&biw=1536&bih=746&dpr=1.25"
         r = rq.get(url=url).text
-        print(r)
+
 
 def draw_nft() :
     current_pos = 0
