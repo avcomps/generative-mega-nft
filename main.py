@@ -1,8 +1,9 @@
 # Copyright @ Ali Vorobiev (https://github.com/avcomps).
 
-import requests as rq
 from PIL import Image, ImageDraw
+import requests as rq
 import random
+import json
 
 def concatenate_h(img_left, img_right) :
     img_new = Image.new('RGB', (img_left.width + img_right.width, img_left.height))
@@ -20,21 +21,26 @@ def draw_white_square() :
     img_weigth, img_height = 160, 160; shape = [(0, 0), (img_weigth, img_height)]
     img_res = Image.new('RGB', (img_weigth, img_height))
     ImageDraw.Draw(img_res).rectangle(shape, fill=("#%06x" % random.randint(0, 0xFFFFFF)))
-
     return img_res
 
-def draw_goal_image(index) : 
+def draw_goal_image() : 
     img_goal = Image.open("./goals/example_goal.jpg")
-    img_goal.thumbnail((400, 400))
-    return img_goal.crop(((img_goal.width - 160) // 2, (img_goal.height - 160) // 2, 
-                                (img_goal.width + 160) // 2, (img_goal.height + 160) // 2))
+    img_goal = img_goal.crop(((img_goal.width - 300) // 2, (img_goal.height - 300) // 2, 
+        (img_goal.width + 300) // 2, (img_goal.height + 300) // 2))
+    img_goal.thumbnail((160, 160))
+    return img_goal
 
 def crawl_goal_images() :
-    pass
+    with open('./goals.json', 'r') as f:
+        data = json.load(f)
+    print(data[0])
+    url = "https://www.google.com/search?q=ronaldo%20goal%20number%201%20real%20madrid&tbm=isch&ijn=0"
+    headers = { 'User-Agent' : 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36' }
+    r = rq.get(url=url, headers=headers).text
 
 def draw_nft() :
-    first_segment : Image
     current_pos = 0
+    first_segment : Image
     for y in range(30) :
         if (y == 0) :
             for x in range(27) :
@@ -52,7 +58,6 @@ def draw_nft() :
             first_segment = concatenate_v(first_segment, first_square)
     
     first_segment.save("./example.jpg", "JPEG")
-    print(current_pos)
 
 
 def main():
