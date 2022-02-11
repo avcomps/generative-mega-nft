@@ -1,9 +1,11 @@
 # Copyright @ Ali Vorobiev (https://github.com/avcomps).
 
+from os import link
 from PIL import Image, ImageDraw
 import requests as rq
 import random
 import json
+import re
 
 def concatenate_h(img_left, img_right) :
     img_new = Image.new('RGB', (img_left.width + img_right.width, img_left.height))
@@ -35,18 +37,20 @@ def draw_goal_image() :
     return img_goal
 
 def crawl_goal_images() :
-    return
     with open('./goals.json', 'r') as file_goals :
-        goals = json.load(file_goals); i = 0
-
+        goals = json.load(file_goals)
+    
+    i = 0
     for goal in goals :
         if "Season" in str(goal[0]) :
             del goals[i]; i += 1
 
     for goal in goals :
-        url = "https://www.google.com/search?q=" + "ronaldo" + "&rlz=1C1ONGR_esES976ES976&source=lnms&tbm=isch&sa=X&ved=2ahUKEwi6zq2ThfT1AhUQtaQKHSMEAwMQ_AUoAXoECAIQAw&biw=1536&bih=746&dpr=1.25"
+        url = "https://www.google.com/search?q=" + "ronaldo goal vs " + goal[6] + goal[7] + goal[11] + "&rlz=1C1ONGR_esES976ES976&source=lnms&tbm=isch&sa=X&ved=2ahUKEwi6zq2ThfT1AhUQtaQKHSMEAwMQ_AUoAXoECAIQAw&biw=1536&bih=746&dpr=1.25"
         r = rq.get(url=url).text
-
+        links = re.findall("(https:\/\/encrypted(.+)[^\"])", r)
+        print(links[0])
+        return
 
 def draw_nft() :
     current_pos = 0
@@ -70,12 +74,12 @@ def draw_nft() :
     first_segment.save("./example.jpg", "JPEG")
 
 
-def main():
+def main() :
     crawl_goal_images()
     draw_nft()
 
 if __name__ == "__main__":
-    try:
+    try :
         main()
-    except(KeyboardInterrupt):
+    except(KeyboardInterrupt) :
         print("\nERROR: KeyboardInterrupt")
