@@ -1,11 +1,12 @@
 # Copyright @ Ali Vorobiev (https://github.com/avcomps).
+#!/usr/bin/env python3
 
-from os import link
 from PIL import Image, ImageDraw
 import requests as rq
 import random
 import json
 import re
+import urllib.request
 
 def concatenate_h(img_left, img_right) :
     img_new = Image.new('RGB', (img_left.width + img_right.width, img_left.height))
@@ -44,13 +45,17 @@ def crawl_goal_images() :
     for goal in goals :
         if "Season" in str(goal[0]) :
             del goals[i]; i += 1
-
+    
+    i = 0
     for goal in goals :
-        url = "https://www.google.com/search?q=" + "ronaldo goal vs " + goal[6] + goal[7] + goal[11] + "&rlz=1C1ONGR_esES976ES976&source=lnms&tbm=isch&sa=X&ved=2ahUKEwi6zq2ThfT1AhUQtaQKHSMEAwMQ_AUoAXoECAIQAw&biw=1536&bih=746&dpr=1.25"
-        r = rq.get(url=url).text
-        links = re.findall("(https:\/\/encrypted(.+)[^\"])", r)
-        print(links[0])
-        return
+        url = "https://www.google.com/search?q=" + "cristiano+ronaldo+goal+vs+" + str(goal[6]) + "+" + str(goal[10]) + "&rlz=1C1ONGR_esES976ES976&source=lnms&tbm=isch&sa=X&ved=2ahUKEwi6zq2ThfT1AhUQtaQKHSMEAwMQ_AUoAXoECAIQAw&biw=1536&bih=746&dpr=1.25"
+        print(url)
+        links = re.findall("https:\/\/encrypted.+[^\"]", rq.get(url=url).text)
+        url_goals_img = str(links[0][:121])
+        print(url_goals_img); print(i); i += 1
+        urllib.request.urlretrieve(url_goals_img, "./goals/" + str(i) + "_" + str(goal[6]) + "_" + str(goal[10]) + ".jpg")
+        if i == 25 :
+            return
 
 def draw_nft() :
     current_pos = 0
@@ -60,15 +65,15 @@ def draw_nft() :
             for x in range(27) :
                 current_pos += 1
                 if (x == 0) :
-                    first_square = draw_goal_image()
-                first_square = concatenate_h(first_square, draw_goal_image())
+                    first_square = draw_white_square()
+                first_square = concatenate_h(first_square, draw_white_square())
             first_segment = first_square
         else :
             for x in range(27) :
                 current_pos += 1
                 if (x == 0) :
-                    first_square = draw_goal_image()
-                first_square = concatenate_h(first_square, draw_goal_image())
+                    first_square = draw_white_square()
+                first_square = concatenate_h(first_square, draw_white_square())
             first_segment = concatenate_v(first_segment, first_square)
     
     first_segment.save("./example.jpg", "JPEG")
