@@ -5,6 +5,10 @@ Generative CR7 mega-NFT script
 ## Unstable version
 This `main` branch version is not completed. For further info submit a issue comment. 
 
+## Usage
+Clone the repo, dive into it & open a shell or cmd terminal. Then execute:
+`python main.py`
+
 ## Demo
 Attention: Correct image cropping not coded
 <br/><br/>
