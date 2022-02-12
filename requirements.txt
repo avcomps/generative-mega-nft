@@ -1,7 +1,2 @@
 requests
-random
-json
-re
-glob
-urllib
 pillow
