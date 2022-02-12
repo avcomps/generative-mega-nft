@@ -61,10 +61,11 @@ def draw_nft() :
                 if ":" in str(x) :
                     pos_from = int(str(x).split(":")[0])
                     pos_to = int(str(x).split(":")[1].split(",")[0])
-                    for y in range(pos_from, pos_to) :
-                        pass
+                    pos_in = int(str(x).split(":")[1].split(",")[1])
+                    for y in range(pos_from, pos_to + 1) :
+                        new_res.append((y, pos_in))
                 else :
-                    pass
+                    print(x)
 
         res = new_res
         print(res)
