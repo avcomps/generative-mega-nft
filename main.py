@@ -1,6 +1,7 @@
 # Copyright @ Ali Vorobiev (https://github.com/avcomps).
 #!/usr/bin/env python3
 
+import glob
 from PIL import Image, ImageDraw
 import requests as rq
 import random
@@ -29,10 +30,10 @@ def draw_white_square() :
     
     return img_res
 
-def draw_goal_image() : 
-    img_goal = Image.open("./goals/example_goal.jpg")
-    img_goal = img_goal.crop(((img_goal.width - 300) // 2, (img_goal.height - 300) // 2, 
-        (img_goal.width + 300) // 2, (img_goal.height + 300) // 2))
+def draw_goal_image(img_goal:Image) :
+    bias = 80
+    img_goal = img_goal.crop(((img_goal.width - bias) // 2, (img_goal.height - bias) // 2, 
+        (img_goal.width + bias) // 2, (img_goal.height + bias) // 2))
     img_goal.thumbnail((160, 160))
 
     return img_goal
@@ -48,32 +49,33 @@ def crawl_goal_images() :
     
     i = 0
     for goal in goals :
-        url = "https://www.google.com/search?q=" + "cristiano+ronaldo+goal+vs+" + str(goal[6]) + "+" + str(goal[10]) + "&rlz=1C1ONGR_esES976ES976&source=lnms&tbm=isch&sa=X&ved=2ahUKEwi6zq2ThfT1AhUQtaQKHSMEAwMQ_AUoAXoECAIQAw&biw=1536&bih=746&dpr=1.25"
+        url = "https://www.google.com/search?q=" + "cristiano+ronaldo+goal+vs+" + str(goal[6]) + "+" + str(goal[10]) + "+HD&rlz=1C1ONGR_esES976ES976&source=lnms&tbm=isch&sa=X&ved=2ahUKEwi6zq2ThfT1AhUQtaQKHSMEAwMQ_AUoAXoECAIQAw&biw=1536&bih=746&dpr=1.25"
         print(url)
         links = re.findall("https:\/\/encrypted.+[^\"]", rq.get(url=url).text)
         url_goals_img = str(links[0][:121])
         print(url_goals_img); print(i); i += 1
         urllib.request.urlretrieve(url_goals_img, "./goals/" + str(i) + "_" + str(goal[6]) + "_" + str(goal[10]) + ".jpg")
-        if i == 25 :
+        if i == 5 :
             return
 
 def draw_nft() :
+    list_imgs = [Image.open(item) for i in [glob.glob('./goals/*.%s' % ext) for ext in ["jpg","png"]] for item in i]
     current_pos = 0
     first_segment : Image
-    for y in range(30) :
+    for y in range(25) :
         if (y == 0) :
             for x in range(27) :
                 current_pos += 1
                 if (x == 0) :
-                    first_square = draw_white_square()
-                first_square = concatenate_h(first_square, draw_white_square())
+                    first_square = draw_goal_image(list_imgs[current_pos])
+                first_square = concatenate_h(first_square, draw_goal_image(list_imgs[current_pos]))
             first_segment = first_square
         else :
             for x in range(27) :
                 current_pos += 1
                 if (x == 0) :
-                    first_square = draw_white_square()
-                first_square = concatenate_h(first_square, draw_white_square())
+                    first_square = draw_goal_image(list_imgs[current_pos])
+                first_square = concatenate_h(first_square, draw_goal_image(list_imgs[current_pos]))
             first_segment = concatenate_v(first_segment, first_square)
     
     first_segment.save("./example.jpg", "JPEG")
