@@ -65,7 +65,7 @@ def draw_nft() :
                     for y in range(pos_from, pos_to + 1) :
                         new_res.append((y, pos_in))
                 else :
-                    print(x)
+                    new_res.append((int(str(x).split(",")[0]), int(str(x).split(",")[1])))
 
         res = new_res
         print(res)
