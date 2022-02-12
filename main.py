@@ -34,7 +34,7 @@ def draw_goal_image(img_goal:Image) :
     zoom = 80
     img_goal = img_goal.crop(((img_goal.width - zoom) // 2, (img_goal.height - zoom) // 2, 
         (img_goal.width + zoom) // 2, (img_goal.height + zoom) // 2))
-    img_goal.thumbnail((160, 160))
+    img_goal.thumbnail((300, 300))
 
     return img_goal
 
