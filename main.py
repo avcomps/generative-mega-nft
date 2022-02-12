@@ -2,23 +2,27 @@
 
 #!/usr/bin/env python3
 
+from operator import ne
 import random, json, re, glob, urllib.request, requests as rq
 from PIL import Image, ImageDraw
 
 def concatenate_h(img_left, img_right) :
     img_new = Image.new('RGB', (img_left.width + img_right.width, img_left.height))
     img_new.paste(img_left, (0, 0)); img_new.paste(img_right, (img_left.width, 0))
+
     return img_new
 
 def concatenate_v(img_left, img_right) :
     img_new = Image.new('RGB', (img_left.width, img_left.height + img_right.height))
     img_new.paste(img_left, (0, 0)); img_new.paste(img_right, (0, img_left.height))
+
     return img_new
 
 def draw_color_square() :
     img_weigth, img_height = 160, 160; shape = [(0, 0), (img_weigth, img_height)]
     img_res = Image.new('RGB', (img_weigth, img_height))
     ImageDraw.Draw(img_res).rectangle(shape, fill=("#%06x" % random.randint(0, 0xFFFFFF)))
+
     return img_res
 
 def draw_goal_image(img_goal:Image) :
@@ -26,6 +30,7 @@ def draw_goal_image(img_goal:Image) :
     img_goal = img_goal.crop(((img_goal.width - zoom) // 2, (img_goal.height - zoom) // 2, 
                             (img_goal.width + zoom) // 2, (img_goal.height + zoom) // 2))
     img_goal.thumbnail((300, 300))
+
     return img_goal
 
 def crawl_goal_images() :
@@ -45,7 +50,21 @@ def crawl_goal_images() :
 def draw_nft() :
     list_imgs = [Image.open(item) for i in [glob.glob('./goals/*.%s' % ext) for ext in ["jpg","png"]] for item in i]
     first_segment : Image; current_pos = 0
-    
+
+    with open('./arrays.txt', 'r') as file_art_pos :
+        res = []
+        for line in file_art_pos.readlines() :
+            for x in line.splitlines(False) :
+                res.append(x.split(" - "))
+        new_res = []
+        for pos in res :
+            for x in pos :
+                if ":" in str(x) :
+                    print("is")
+                else :
+                    print("not is")
+        print(new_res)
+
     for y in range(25) :
         if y == 0 :
             for x in range(27) :
