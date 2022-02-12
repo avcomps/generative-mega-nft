@@ -21,15 +21,15 @@ def concatenate_v(img_left, img_right) :
 def draw_color_square() :
     img_weigth, img_height = 160, 160; shape = [(0, 0), (img_weigth, img_height)]
     img_res = Image.new('RGB', (img_weigth, img_height))
-    ImageDraw.Draw(img_res).rectangle(shape, fill=("#%06x" % random.randint(0, 0xFFFFFF)))
+    ImageDraw.Draw(img_res).rectangle(shape, fill=("#%06x" % random.randint(0xFFFEEE, 0xFFFFFF)))
 
     return img_res
 
 def draw_goal_image(img_goal:Image) :
-    zoom = 80
+    zoom = 160
     img_goal = img_goal.crop(((img_goal.width - zoom) // 2, (img_goal.height - zoom) // 2, 
                             (img_goal.width + zoom) // 2, (img_goal.height + zoom) // 2))
-    img_goal.thumbnail((300, 300))
+    img_goal.thumbnail((160, 160))
 
     return img_goal
 
@@ -53,37 +53,49 @@ def draw_nft() :
     res = []
     with open('./arrays.txt', 'r') as file_art_pos :
         for line in file_art_pos.readlines() :
-            for x in line.splitlines(False) :
-                res.append(x.split(" - "))
+            for x in line.splitlines(False) : res.append(x.split(" - "))
         new_res = []
         for pos in res :
-            for x in pos :
-                if ":" in str(x) :
-                    pos_from = int(str(x).split(":")[0])
-                    pos_to = int(str(x).split(":")[1].split(",")[0])
-                    pos_in = int(str(x).split(":")[1].split(",")[1])
-                    for y in range(pos_from, pos_to + 1) :
-                        new_res.append((y, pos_in))
+            for i in pos :
+                if ":" in str(i) :
+                    pos_x_from = int(str(i).split(":")[0])
+                    pos_x_to = int(str(i).split(":")[1].split(",")[0])
+                    pos_y = int(str(i).split(":")[1].split(",")[1])
+                    for j in range(pos_x_from, pos_x_to + 1) : new_res.append((j, pos_y))
                 else :
-                    new_res.append((int(str(x).split(",")[0]), int(str(x).split(",")[1])))
-
+                    new_res.append((int(str(i).split(",")[0]), int(str(i).split(",")[1])))
         res = new_res
-        print(res)
 
-    first_segment : Image; current_pos = 0
+    first_segment : Image; current_pos_x = 0; current_pos_x_seg = 1; current_pos_y = 1
     for y in range(25) :
+        current_pos_x_seg = 0
         if y == 0 :
             for x in range(27) :
-                if x == 0 : first_square = draw_goal_image(list_imgs[current_pos])
-                first_square = concatenate_h(first_square, draw_goal_image(list_imgs[current_pos]))
-                current_pos += 1
+                if (current_pos_x_seg, current_pos_y) in res :
+                    # print("in (" + str(current_pos_x_seg) + ", " + str(current_pos_y) + ")")
+                    if x == 0 : first_square = draw_color_square()
+                    first_square = concatenate_h(first_square, draw_color_square())
+                else :
+                    # print("not in (" + str(current_pos_x_seg) + ", " + str(current_pos_y) + ")")
+                    if x == 0 : first_square = draw_goal_image(list_imgs[current_pos_x])
+                    first_square = concatenate_h(first_square, draw_goal_image(list_imgs[current_pos_x]))
+                current_pos_x += 1
+                current_pos_x_seg += 1
             first_segment = first_square
         else :
             for x in range(27) :
-                if x == 0 : first_square = draw_goal_image(list_imgs[current_pos])
-                first_square = concatenate_h(first_square, draw_goal_image(list_imgs[current_pos]))
-                current_pos += 1
+                if (current_pos_x_seg, current_pos_y) in res :
+                    # print("in (" + str(current_pos_x_seg) + ", " + str(current_pos_y) + ")")
+                    if x == 0 : first_square = draw_color_square()
+                    first_square = concatenate_h(first_square, draw_color_square())
+                else :
+                    # print("not in (" + str(current_pos_x_seg) + ", " + str(current_pos_y) + ")")
+                    if x == 0 : first_square = draw_goal_image(list_imgs[current_pos_x])
+                    first_square = concatenate_h(first_square, draw_goal_image(list_imgs[current_pos_x]))
+                current_pos_x += 1
+                current_pos_x_seg += 1
             first_segment = concatenate_v(first_segment, first_square)
+        current_pos_y += 1
     
     first_segment.save("./example.jpg", "JPEG")
 
