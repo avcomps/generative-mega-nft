@@ -49,10 +49,9 @@ def crawl_goal_images() :
 
 def draw_nft() :
     list_imgs = [Image.open(item) for i in [glob.glob('./goals/*.%s' % ext) for ext in ["jpg","png"]] for item in i]
-    first_segment : Image; current_pos = 0
-
+    
+    res = []
     with open('./arrays.txt', 'r') as file_art_pos :
-        res = []
         for line in file_art_pos.readlines() :
             for x in line.splitlines(False) :
                 res.append(x.split(" - "))
@@ -60,11 +59,17 @@ def draw_nft() :
         for pos in res :
             for x in pos :
                 if ":" in str(x) :
-                    print("is")
+                    pos_from = int(str(x).split(":")[0])
+                    pos_to = int(str(x).split(":")[1].split(",")[0])
+                    for y in range(pos_from, pos_to) :
+                        pass
                 else :
-                    print("not is")
-        print(new_res)
+                    pass
 
+        res = new_res
+        print(res)
+
+    first_segment : Image; current_pos = 0
     for y in range(25) :
         if y == 0 :
             for x in range(27) :
