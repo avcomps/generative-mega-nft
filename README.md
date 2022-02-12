@@ -1,6 +1,6 @@
 
 # generative-mega-nft
-Generative CR7 mega-NFT script
+CR7 generative mega-NFT script
 
 ## Unstable version
 This `main` branch version is not completed. For further info submit a issue comment. 
