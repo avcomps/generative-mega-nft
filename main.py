@@ -1,5 +1,6 @@
-#!/usr/bin/env python3
 # Copyright @ Ali Vorobiev (https://github.com/avcomps).
+
+#!/usr/bin/env python3
 
 import random, json, re, glob, urllib.request, requests as rq
 from PIL import Image, ImageDraw
@@ -14,7 +15,7 @@ def concatenate_v(img_left, img_right) :
     img_new.paste(img_left, (0, 0)); img_new.paste(img_right, (0, img_left.height))
     return img_new
 
-def draw_white_square() :
+def draw_color_square() :
     img_weigth, img_height = 160, 160; shape = [(0, 0), (img_weigth, img_height)]
     img_res = Image.new('RGB', (img_weigth, img_height))
     ImageDraw.Draw(img_res).rectangle(shape, fill=("#%06x" % random.randint(0, 0xFFFFFF)))
@@ -35,10 +36,10 @@ def crawl_goal_images() :
             del goals[i]; i += 1
     i = 0
     for goal in goals :
-        url = "https://www.google.com/search?q=" + "cristiano+ronaldo+goal+vs+" + str(goal[6]) + "+" + str(goal[10]) + "+HD&rlz=1C1ONGR_esES976ES976&source=lnms&tbm=isch&sa=X&ved=2ahUKEwi6zq2ThfT1AhUQtaQKHSMEAwMQ_AUoAXoECAIQAw&biw=1536&bih=746&dpr=1.25"
+        url = "https://www.google.com/search?q=" + "cristiano+ronaldo+goal+vs+" + str(goal[6]) + "+" + str(goal[10]) + "+HD&" + """rlz=1C1ONGR_esES976ES976
+            &source=lnms&tbm=isch&sa=X&ved=2ahUKEwi6zq2ThfT1AhUQtaQKHSMEAwMQ_AUoAXoECAIQAw&biw=1536&bih=746&dpr=1.25"""
         links = re.findall("https:\/\/encrypted.+[^\"]", rq.get(url=url).text)
-        url_goals_img = str(links[0][:121])
-        urllib.request.urlretrieve(url_goals_img, "./goals/" + str(i) + "_" + str(goal[6]) + "_" + str(goal[10]) + ".jpg")
+        urllib.request.urlretrieve(str(links[0][:121]), "./goals/" + str(i) + "_" + str(goal[6]) + "_" + str(goal[10]) + ".jpg")
         i += 1
 
 def draw_nft() :
