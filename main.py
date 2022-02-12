@@ -70,27 +70,23 @@ def draw_nft() :
         if y == 0 :
             for x in range(27) :
                 if (current_pos_x_seg, current_pos_y) in res :
-                    # print("in (" + str(current_pos_x_seg) + ", " + str(current_pos_y) + ")")
                     if x == 0 : first_square = draw_color_square()
                     first_square = concatenate_h(first_square, draw_color_square())
                 else :
-                    # print("not in (" + str(current_pos_x_seg) + ", " + str(current_pos_y) + ")")
                     if x == 0 : first_square = draw_goal_image(list_imgs[current_pos_x])
                     first_square = concatenate_h(first_square, draw_goal_image(list_imgs[current_pos_x]))
-                current_pos_x += 1
+                    current_pos_x += 1
                 current_pos_x_seg += 1
             first_segment = first_square
         else :
             for x in range(27) :
                 if (current_pos_x_seg, current_pos_y) in res :
-                    # print("in (" + str(current_pos_x_seg) + ", " + str(current_pos_y) + ")")
                     if x == 0 : first_square = draw_color_square()
                     first_square = concatenate_h(first_square, draw_color_square())
                 else :
-                    # print("not in (" + str(current_pos_x_seg) + ", " + str(current_pos_y) + ")")
                     if x == 0 : first_square = draw_goal_image(list_imgs[current_pos_x])
                     first_square = concatenate_h(first_square, draw_goal_image(list_imgs[current_pos_x]))
-                current_pos_x += 1
+                    current_pos_x += 1
                 current_pos_x_seg += 1
             first_segment = concatenate_v(first_segment, first_square)
         current_pos_y += 1
