@@ -9,6 +9,9 @@ This `main` branch version is not completed. For further info submit a issue com
 Clone the repo, dive into it & open a shell or cmd terminal. Then execute:
 `python main.py`
 
+## Content
+`goals.json` contains all Ronaldo goals with all teams (except national-team). "Goals" folder contains all goal images crawled by the main program.
+
 ## Demo
 Attention: Correct image cropping not coded
 <br/><br/>
