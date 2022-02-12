@@ -5,12 +5,12 @@ CR7 generative mega-NFT script.
 ## Unstable version
 This `main` branch version is not completed. For further info submit a issue comment. 
 
+## Content
+`goals.json` contains all Ronaldo goals with all teams (except national-team). "Goals" folder contains all goal images crawled by the main program; goals data extracted from player's [Transfermarket.com](https://www.transfermarkt.com/cristiano-ronaldo/alletore/spieler/8198) profile.
+
 ## Usage
 Clone the repo, dive into it & open a shell or cmd terminal. Then execute:
 `python main.py`
-
-## Content
-`goals.json` contains all Ronaldo goals with all teams (except national-team). "Goals" folder contains all goal images crawled by the main program; goals data extracted from player's [Transfermarket.com](https://www.transfermarkt.com/cristiano-ronaldo/alletore/spieler/8198) profile.
 
 ## Demo
 Attention: Correct image cropping not coded.
