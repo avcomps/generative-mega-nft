@@ -99,7 +99,7 @@ def draw_nft() :
 
 
 def main() :
-    # crawl_goal_images()
+    crawl_goal_images()
     draw_nft()
 
 if __name__ == "__main__":
