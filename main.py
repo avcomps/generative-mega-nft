@@ -48,7 +48,6 @@ def crawl_goal_images() :
 
 def draw_nft() :
     list_imgs = [Image.open(item) for i in [glob.glob('./goals/*.%s' % ext) for ext in ["jpg","png"]] for item in i]
-    
     res = []
     with open('./arrays.txt', 'r') as file_art_pos :
         for line in file_art_pos.readlines() :
