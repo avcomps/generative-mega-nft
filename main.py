@@ -2,7 +2,6 @@
 
 #!/usr/bin/env python3
 
-from operator import ne
 import random, json, re, glob, urllib.request, requests as rq
 from PIL import Image, ImageDraw
 
@@ -27,11 +26,11 @@ def draw_color_square() :
 
 def draw_goal_image(img_goal:Image) :
     zoom = 160
-    img_goal = img_goal.crop(((img_goal.width - zoom) // 2, (img_goal.height - zoom) // 2, 
+    img_res = img_goal.crop(((img_goal.width - zoom) // 2, (img_goal.height - zoom) // 2, 
                             (img_goal.width + zoom) // 2, (img_goal.height + zoom) // 2))
-    img_goal.thumbnail((160, 160))
+    img_res.thumbnail((160, 160))
 
-    return img_goal
+    return img_res
 
 def crawl_goal_images() :
     with open('./goals.json', 'r') as file_goals : goals = json.load(file_goals)
