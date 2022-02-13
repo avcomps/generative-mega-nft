@@ -5,15 +5,32 @@
 import random, json, re, glob, urllib.request, requests as rq
 from PIL import Image, ImageDraw
 
+
+"""
+    test_function does blah blah blah.
+
+    :param p1: describe about parameter p1
+    :param p2: describe about parameter p2
+    :param p3: describe about parameter p3
+    :return: describe what it returns
+    """ 
 def concatenate_h(img_left, img_right) :
     img_new = Image.new('RGB', (img_left.width + img_right.width, img_left.height))
     img_new.paste(img_left, (0, 0)); img_new.paste(img_right, (img_left.width, 0))
 
     return img_new
 
-def concatenate_v(img_left, img_right) :
-    img_new = Image.new('RGB', (img_left.width, img_left.height + img_right.height))
-    img_new.paste(img_left, (0, 0)); img_new.paste(img_right, (0, img_left.height))
+"""
+    test_function does blah blah blah.
+
+    :param p1: describe about parameter p1
+    :param p2: describe about parameter p2
+    :param p3: describe about parameter p3
+    :return: describe what it returns
+    """ 
+def concatenate_v(img_top, img_bottom) :
+    img_new = Image.new('RGB', (img_top.width, img_top.height + img_bottom.height))
+    img_new.paste(img_top, (0, 0)); img_new.paste(img_bottom, (0, img_top.height))
 
     return img_new
 
@@ -33,6 +50,8 @@ def draw_goal_image(img_goal:Image) :
     return img_res
 
 def crawl_goal_images() :
+    print("Crawling & downloading goal images (might take few minutes) ...")
+    print("--------------------------------------")
     with open('./goals.json', 'r') as file_goals : goals = json.load(file_goals)
     i = 0
     for goal in goals :
@@ -47,6 +66,8 @@ def crawl_goal_images() :
         i += 1
 
 def draw_nft() :
+    print("Drawing NFT image ...")
+    print("--------------------------------------")
     list_imgs = [Image.open(item) for i in [glob.glob('./goals/*.%s' % ext) for ext in ["jpg","png"]] for item in i]
     res = []
     with open('./arrays.txt', 'r') as file_art_pos :
@@ -65,7 +86,7 @@ def draw_nft() :
         res = new_res
 
     first_segment : Image; current_pos_x = 0; current_pos_x_seg = 1; current_pos_y = 1
-    for y in range(25) :
+    for y in range(27) :
         current_pos_x_seg = 0
         if y == 0 :
             for x in range(27) :
@@ -91,12 +112,13 @@ def draw_nft() :
             first_segment = concatenate_v(first_segment, first_square)
         current_pos_y += 1
     
-    first_segment.save("./example.jpg", "JPEG")
+    first_segment.save("./output_NFT.jpg", "JPEG")
 
 
 def main() :
-    crawl_goal_images()
+    # crawl_goal_images()
     draw_nft()
+    print("Script finished: NFT image saved on root (\"/\") folder.")
 
 if __name__ == "__main__":
     try :

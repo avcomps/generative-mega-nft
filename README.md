@@ -17,12 +17,12 @@ Attention: Correct image cropping not coded.
 <br/><br/>
 100px
 <br/>
-![](https://raw.githubusercontent.com/avcomps/generative-mega-nft/main/example_resized_100px.jpg)
+<img src="https://raw.githubusercontent.com/avcomps/generative-mega-nft/main/output_NFT.jpg" alt="output_image_150px" width="150"/>
 <br/><br/>
 500px
 <br/>
-![](https://raw.githubusercontent.com/avcomps/generative-mega-nft/main/example_resized_500px.jpg)
+<img src="https://raw.githubusercontent.com/avcomps/generative-mega-nft/main/output_NFT.jpg" alt="output_image_500px" width="500"/>
 <br/><br/>
 Original version - 4480px
 <br/>
-![](https://raw.githubusercontent.com/avcomps/generative-mega-nft/main/example.jpg)
+![](https://raw.githubusercontent.com/avcomps/generative-mega-nft/main/output_NFT.jpg)
