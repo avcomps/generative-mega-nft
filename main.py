@@ -1,4 +1,4 @@
-# Copyright @ Ali Vorobiev (https://github.com/avcomps).
+# MIT License @ Ali Vorobiev (https://github.com/avcomps).
 
 #!/usr/bin/env python3
 
@@ -6,43 +6,57 @@ import random, json, re, glob, urllib.request, requests as rq
 from PIL import Image, ImageDraw
 
 
-"""
-    test_function does blah blah blah.
+def concatenate_h(img_left: Image, img_right: Image) :
+    """
+    Concatenate two Image horizontally.
 
-    :param p1: describe about parameter p1
-    :param p2: describe about parameter p2
-    :param p3: describe about parameter p3
-    :return: describe what it returns
-    """ 
-def concatenate_h(img_left, img_right) :
+    :param img_left: Image being concatenated.
+    :param img_right: Image to concatenate.
+
+    :return: The new horizontally concatenated Image.
+    """
+
     img_new = Image.new('RGB', (img_left.width + img_right.width, img_left.height))
     img_new.paste(img_left, (0, 0)); img_new.paste(img_right, (img_left.width, 0))
 
     return img_new
 
-"""
-    test_function does blah blah blah.
+def concatenate_v(img_top: Image, img_bottom: Image) :
+    """
+    Concatenate two Image vertically.
 
-    :param p1: describe about parameter p1
-    :param p2: describe about parameter p2
-    :param p3: describe about parameter p3
-    :return: describe what it returns
-    """ 
-def concatenate_v(img_top, img_bottom) :
+    :param img_top: Image being concatenated.
+    :param img_bottom: Image to concatenate.
+    
+    :return: The new vertically concatenated Image.
+    """
+
     img_new = Image.new('RGB', (img_top.width, img_top.height + img_bottom.height))
     img_new.paste(img_top, (0, 0)); img_new.paste(img_bottom, (0, img_top.height))
 
     return img_new
 
 def draw_color_square() :
+    """
+    Draw a random-colored square.
+    
+    :return: The square as Image.
+    """
+
     img_weigth, img_height = 160, 160; shape = [(0, 0), (img_weigth, img_height)]
     img_res = Image.new('RGB', (img_weigth, img_height))
     ImageDraw.Draw(img_res).rectangle(shape, fill=("#%06x" % random.randint(0xFFFEEE, 0xFFFFFF)))
 
     return img_res
 
-def draw_goal_image(img_goal:Image) :
-    zoom = 160
+def draw_goal_image(img_goal: Image) :
+    """
+    Draw a player's goal Image.
+    
+    :return: The goal Image.
+    """ 
+    
+    zoom = 160; img_res : Image
     img_res = img_goal.crop(((img_goal.width - zoom) // 2, (img_goal.height - zoom) // 2, 
                             (img_goal.width + zoom) // 2, (img_goal.height + zoom) // 2))
     img_res.thumbnail((160, 160))
@@ -50,6 +64,10 @@ def draw_goal_image(img_goal:Image) :
     return img_res
 
 def crawl_goal_images() :
+    """
+    Crawl player goals images from Google Images using simple "GET" HTTP request.
+    """ 
+
     print("Crawling & downloading goal images (might take few minutes) ...")
     print("--------------------------------------")
     with open('./goals.json', 'r') as file_goals : goals = json.load(file_goals)
@@ -66,6 +84,10 @@ def crawl_goal_images() :
         i += 1
 
 def draw_nft() :
+    """
+    Draw the NFT image and export it to the root folder.
+    """ 
+
     print("Drawing NFT image ...")
     print("--------------------------------------")
     list_imgs = [Image.open(item) for i in [glob.glob('./goals/*.%s' % ext) for ext in ["jpg","png"]] for item in i]
