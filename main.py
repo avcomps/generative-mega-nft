@@ -138,7 +138,7 @@ def draw_nft() :
 
 
 def main() :
-    # crawl_goal_images()
+    crawl_goal_images()
     draw_nft()
     print("Script finished: NFT image saved on root (\"/\") folder.")
 
