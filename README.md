@@ -10,7 +10,12 @@ This `main` branch version is not completed. For further info submit a issue com
 
 ## Usage
 Python 3 is a must; Clone the repo, dive into it & open a shell or cmd terminal. Then execute:<br/>
-`pip3 install -r requirements.txt && python3 main.py`
+
+```
+git clone https://github.com/avcomps/generative-mega-nft
+cd g*nft
+pip3 install -r requirements.txt && python3 main.py
+```
 
 ## Demo
 Attention: Goal image cropping not coded.
