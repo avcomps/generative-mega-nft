@@ -9,7 +9,7 @@ This `main` branch version is not completed. For further info submit a issue com
 `goals.json` contains all Ronaldo goals with all teams (except national-team). "Goals" folder contains all goal images crawled by the main program; goals data extracted from player's [Transfermarkt.com](https://www.transfermarkt.com/cristiano-ronaldo/alletore/spieler/8198) profile.
 
 ## Usage
-Python 3 is a must; Clone the repo, dive into it & open a shell or cmd terminal. Then execute:<br/>
+Python 3 is a must; Clone the repo, dive into it & execute the script:<br/>
 
 ```
 git clone https://github.com/avcomps/generative-mega-nft
